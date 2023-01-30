@@ -429,7 +429,7 @@
 
             savebtn.addEventListener('click', () => {
                 addNote();
-            })
+            });
         }
 
 
@@ -438,6 +438,7 @@
                 let id = document.cookie;
                 let pid = Number.parseInt(id.slice(3));
                 console.debug(pid);
+                let flag = 0;
 
 
                 if (localStorage.length == 0) {
@@ -447,19 +448,23 @@
                 else {
                     for (let i = 1; i <= Number.parseInt(pid); i++) {
                         try {
+                            
                             let noteData = localStorage.getItem(i);
                             console.info(noteData);
                             setNote(JSON.parse(noteData), i);
+                            flag++;
                         }
                         catch (e) {
-    
+                            
                         }
     
                     }
+                     if(flag==0)
+                     {
+                        noteEmpty();
+                     }
     
                 }
-
-
               
 
             }
@@ -480,6 +485,7 @@
 
             document.head.appendChild(hscript);
 
+            
 
             hscript.onload = () => {
                 Notelist.insertAdjacentHTML('afterbegin', `<div id="noteeditor">
@@ -551,12 +557,13 @@
 
         let saveNote = (data) => {
             let datas = JSON.stringify(data);
+            let id = document.cookie;
+            let pid = Number.parseInt(id.slice(3));
 
-            if (document.cookie) {
-                let id = document.cookie;
-                let pid = Number.parseInt(id.slice(3));
+            if (pid!=0) {
+                
                 console.debug(pid);
-                document.cookie = "id=" + (pid + 1);
+                document.cookie = "id=" + String((pid + 1));
 
                 localStorage.setItem(pid, datas);
                 Notelist.innerHTML = "";
