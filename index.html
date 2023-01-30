@@ -440,12 +440,12 @@
                 console.debug(pid);
 
 
-                if (localStorage.length - 2 == 0 || localStorage.length == 0) {
+                if (localStorage.length == 0) {
                     console.log("nothing");
                     noteEmpty();
                 }
                 else {
-                    for (let i = 1; i < pid; i++) {
+                    for (let i = 1; i <= Number.parseInt(pid); i++) {
                         try {
                             let noteData = localStorage.getItem(i);
                             console.info(noteData);
@@ -566,7 +566,7 @@
             }
             else {
                 document.cookie = "id=1";
-                localStorage.setItem(1, datas);
+                localStorage.setItem('1', datas);
                 Notelist.innerHTML = "";
                 fetchNotes();
                 setSavebtn();
