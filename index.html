@@ -404,7 +404,8 @@
             noteP1.onclick = () => {
                 openNote(id);
             }
-            noteP1.innerText = value.Ntitle + "......";
+            let t =  value.Ntitle;
+            noteP1.innerText = t.slice(0, 15)+ "......";
             let noteP2 = document.createElement("p");
             noteP2.onclick = () => {
                 deleteNote(id);
